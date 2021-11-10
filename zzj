@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    int n = 0 ;
+    long long int max ;
+	string zzj ;
+	cin >> zzj ;
+	int s = zzj.length() - 1 ;
+
+	if( zzj.at( 1 ) == '0' && zzj.length() == 2 )
+    {
+            cout << zzj.at(0) << endl ;
+            return 0 ;
+    }
+
+    for( int i = 0 ; i < zzj.length() - 1 ; i++ )
+    {
+
+        //前一位小于后一位 则交换该位的数
+        if( zzj.at( i ) < zzj.at( i + 1 ) )
+        {
+                max = zzj.at( i + 1 ) ;
+                zzj.at( i + 1 ) = zzj.at( i ) ;
+                zzj.at( i ) = max ;
+                break ;
+        }
+
+        //前一位等于后一位 不做该改变
+        else if( zzj.at( i ) == zzj.at( i + 1 ) )
+        {
+                if( zzj.at( i + 1 ) != zzj.at( i ) && zzj.at( i + 1 ) > zzj.at( i ) )
+                {
+                    max = zzj.at( i ) ;
+                    zzj.at( i + 1 ) = zzj.at( i ) ;
+                    zzj.at( i ) = max ;
+                }
+                else
+                {
+                    max = zzj.at( i ) ;
+                    zzj.at( i + 1 ) = zzj.at( i ) ;
+                    zzj.at( i ) = max ;
+                }
+        }
+
+        //前一位大于后一位 n位前一项大于后一项的次数
+        //若n==zzj.length() - 1  则该数为降序 交换最后两位
+        else if( zzj.at(i) > zzj.at(i+1) )
+        {
+                n = n + 1 ;
+                if( n == s )
+                {
+                        max = zzj.at( i + 1 ) ;
+                        zzj.at( i + 1 ) = zzj.at( i ) ;
+                        zzj.at( i ) = max ;
+                        break;
+                }
+
+        }
+
+    }
+    cout << zzj << endl ;
+	return 0 ;
+}
